@@ -103,8 +103,25 @@ const jose = new Humanoid({
   team: 'Green',
   createdAt: Date.now()
 })
+const hero = new Humanoid({
+  name: 'GoodGuy',
+  language: 'Spanish',
+  dimensions: {length: 4,width:5,height:6},
+  team: 'Green',
+  createdAt: Date.now()
+})
+const villain = new Humanoid({
+  name: 'Badman',
+  language: 'Spanish',
+  dimensions: {length: 4,width:5,height:6},
+  team: 'Green',
+  createdAt: Date.now()
+})
+
 console.log(jose)
 console.log(dan)
+console.log(hero)
+console.log(villain)
 console.log(dan.greet())
 console.log(jose.greet())
 console.log(jose.destroy())
