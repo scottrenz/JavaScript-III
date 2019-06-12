@@ -9,7 +9,7 @@
 */
   
 attributes = [
-  {createdAt: '06/12/2019', name: 'Scott', dimensions: '34x37', healthPoints: 999, team: 'yellow', weapons: ['gun','knife','bomb'], language: 'English'}
+  {createdAt: '06/12/2019', name: 'Scott', dimensions: [{length: 999, width: 999, height: 999}], healthPoints: 999, team: 'yellow', weapons: ['gun','knife','bomb'], language: 'English'}
 ]
 console.log(attributes)
 /*
