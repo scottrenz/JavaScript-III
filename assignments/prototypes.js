@@ -8,6 +8,10 @@
   Each constructor function has unique properties and methods that are defined in their block comments below:
 */
   
+attributes = [
+  {createdAt: '06/12/2019', name: 'Scott', dimensions: '34x37', healthPoints: 999, team: 'yellow', weapons: ['gun','knife','bomb'], language: 'English'}
+]
+console.log(attributes)
 /*
   === GameObject ===
   * createdAt
@@ -16,12 +20,32 @@
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
+function GameObject(attributes) {
+  this.createdAt = attributes.createdAt
+  this.name = attributes.name
+  this.dimensions = attributes.dimensions
+}
+GameObject.prototype.destroy = function() {
+  return (`${this.name} was removed from the game.` );
+  
+}
+
 /*
   === CharacterStats ===
   * healthPoints
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
+
+function CharacterStats(attributes) {
+  GameObject.call(this, attributes)
+  this.healthPoints = attributes.healthPoints
+
+}
+CharacterStats.prototype = Object.create(GameObject.prototype)
+CharacterStats.prototype.takeDamage = function() {
+  return (`${this.name} took damage.`)
+}
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -32,6 +56,55 @@
   * should inherit destroy() from GameObject through CharacterStats
   * should inherit takeDamage() from CharacterStats
 */
+
+function Humanoid(attributes) {
+  CharacterStats.call(this, attributes)
+  this.team = attributes.team
+  this.weapons = attributes.weapons
+  this.language = attributes.language
+
+}
+
+Humanoid.prototype = Object.create(CharacterStats.prototype)
+Humanoid.prototype.greet = function() {
+  if(this.language === 'English')
+  {return `Hello ${this.name}!`}
+  else
+  {
+    if(this.language === 'Spanish')
+    {return `Hola ${this.name}!`}
+    else
+   {
+     if(this.language === 'French')
+     {return `Bonjour ${this.name}!`}
+     else
+     {return `Xzkmnq ${this.name}!`}
+   }
+  }
+}
+
+const dan = new Humanoid({
+  name: 'Dan',
+  language: 'French',
+  dimensions: '22x44',
+  team: 'Red',
+  createdAt: Date.now()
+})
+
+const jose = new Humanoid({
+  name: 'Jose',
+  language: 'Spanish',
+  dimensions: '55x99',
+  team: 'Green',
+  createdAt: Date.now()
+})
+console.log(jose)
+console.log(dan)
+console.log(dan.greet())
+console.log(jose.greet())
+console.log(jose.destroy())
+console.log(dan.takeDamage())
+
  
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
