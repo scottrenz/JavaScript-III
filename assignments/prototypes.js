@@ -9,7 +9,7 @@
 */
   
 attributes = [
-  {createdAt: '06/12/2019', name: 'Scott', dimensions: [{length: 999, width: 999, height: 999}], healthPoints: 999, team: 'yellow', weapons: ['gun','knife','bomb'], language: 'English'}
+  {createdAt: '06/12/2019', name: 'Scott', dimensions: {length: 999, width: 999, height: 999}, healthPoints: 999, team: 'yellow', weapons: ['gun','knife','bomb'], language: 'English'}
 ]
 console.log(attributes)
 /*
@@ -75,18 +75,23 @@ Humanoid.prototype.greet = function() {
     {return `Hola ${this.name}!`}
     else
    {
-     if(this.language === 'French')
-     {return `Bonjour ${this.name}!`}
-     else
-     {return `Xzkmnq ${this.name}!`}
+    if(this.language === 'French')
+    {return `Bonjour ${this.name}!`}
+    else
+    {
+      if(this.language === 'Elvish')
+      {return `Suilad ${this.name}!`}
+      else
+      {return `Xzkmnq ${this.name}!`}
+    }
    }
   }
 }
-
+// Suilad
 const dan = new Humanoid({
   name: 'Dan',
   language: 'French',
-  dimensions: '22x44',
+  dimensions: {length: 1,width:2,height:3},
   team: 'Red',
   createdAt: Date.now()
 })
@@ -94,7 +99,7 @@ const dan = new Humanoid({
 const jose = new Humanoid({
   name: 'Jose',
   language: 'Spanish',
-  dimensions: '55x99',
+  dimensions: {length: 4,width:5,height:6},
   team: 'Green',
   createdAt: Date.now()
 })
@@ -104,6 +109,7 @@ console.log(dan.greet())
 console.log(jose.greet())
 console.log(jose.destroy())
 console.log(dan.takeDamage())
+console.log(jose.dimensions)
 
  
 /*
