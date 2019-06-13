@@ -53,7 +53,8 @@ function CordialPerson(greeter) {
 // code example for Explicit Binding
 function tellUsAboutYourself(thing1, thing2, thing3){
     console.log( `Hi! My name is ${this.name}, I live in ${this.city}, and I enjoy ${thing1}, ${thing2}, and ${thing3}. I love to eat ${this.favoriteFood}.`)
- //   return `Hi! My name is ${this.name}, I live in ${this.city}, and I enjoy ${thing1}, ${thing2}, and ${thing3}. I love to eat ${this.favoriteFood}.`
+    console.log(this);
+    //   return `Hi! My name is ${this.name}, I live in ${this.city}, and I enjoy ${thing1}, ${thing2}, and ${thing3}. I love to eat ${this.favoriteFood}.`
   }
    function ConstructObj(name, city, food) {
    this.name = name;

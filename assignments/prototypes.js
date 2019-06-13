@@ -93,6 +93,7 @@ const dan = new Humanoid({
   language: 'French',
   dimensions: {length: 1,width:2,height:3},
   team: 'Red',
+  healthPoints: 999,
   createdAt: Date.now()
 })
 
@@ -115,8 +116,21 @@ const villain = new Humanoid({
   language: 'Spanish',
   dimensions: {length: 4,width:5,height:6},
   team: 'Green',
-  createdAt: Date.now()
+  createdAt: Date.now(),
 })
+villain.weaken =  function(victim) {
+  let dummy;
+  let health = 0;
+  health = victim.healthPoints
+  if (victim.healthPoints === dummy)
+    { health = 0}
+    victim.healthPoints = health - 10;
+  let message = (`${victim.name}'s Health was was ${health} is now ${victim.healthPoints}.` );
+  return message;  
+}
+
+console.log(villain.weaken(dan));
+console.log(villain.weaken(jose));
 
 console.log(jose)
 console.log(dan)
