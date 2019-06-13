@@ -125,7 +125,7 @@ villain.weaken =  function(victim) {
   if (victim.healthPoints === dummy)
     { health = 0}
     victim.healthPoints = health - 10;
-  let message = (`${victim.name}'s Health was was ${health} is now ${victim.healthPoints}.` );
+  let message = (`${victim.name}'s Health was ${health} is now ${victim.healthPoints}.` );
   return message;  
 }
 
