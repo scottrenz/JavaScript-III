@@ -129,8 +129,21 @@ villain.weaken =  function(victim) {
   return message;  
 }
 
+hero.strengthen =  function(receiver) {
+  let dummy;
+  let health = 0;
+  health = receiver.healthPoints
+  if (receiver.healthPoints === dummy)
+    { health = 0}
+    receiver.healthPoints = health + 10;
+  let message = (`${receiver.name}'s Health was ${health} is now ${receiver.healthPoints}.` );
+  return message;  
+}
+
 console.log(villain.weaken(dan));
 console.log(villain.weaken(jose));
+console.log(hero.strengthen(jose));
+console.log(hero.strengthen(hero));
 
 console.log(jose)
 console.log(dan)
