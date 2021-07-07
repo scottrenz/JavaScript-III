@@ -8,6 +8,10 @@
   Each constructor function has unique properties and methods that are defined in their block comments below:
 */
   
+attributes = [
+  {createdAt: '06/12/2019', name: 'Scott', dimensions: {length: 999, width: 999, height: 999}, healthPoints: 999, team: 'yellow', weapons: ['gun','knife','bomb'], language: 'English'}
+]
+console.log(attributes)
 /*
   === GameObject ===
   * createdAt
@@ -16,12 +20,32 @@
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
+function GameObject(attributes) {
+  this.createdAt = attributes.createdAt
+  this.name = attributes.name
+  this.dimensions = attributes.dimensions
+}
+GameObject.prototype.destroy = function() {
+  return (`${this.name} was removed from the game.` );
+  
+}
+
 /*
   === CharacterStats ===
   * healthPoints
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
+
+function CharacterStats(attributes) {
+  GameObject.call(this, attributes)
+  this.healthPoints = attributes.healthPoints
+
+}
+CharacterStats.prototype = Object.create(GameObject.prototype)
+CharacterStats.prototype.takeDamage = function() {
+  return (`${this.name} took damage.`)
+}
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -32,6 +56,105 @@
   * should inherit destroy() from GameObject through CharacterStats
   * should inherit takeDamage() from CharacterStats
 */
+
+function Humanoid(attributes) {
+  CharacterStats.call(this, attributes)
+  this.team = attributes.team
+  this.weapons = attributes.weapons
+  this.language = attributes.language
+
+}
+
+Humanoid.prototype = Object.create(CharacterStats.prototype)
+Humanoid.prototype.greet = function() {
+  if(this.language === 'English')
+  {return `Hello ${this.name}!`}
+  else
+  {
+    if(this.language === 'Spanish')
+    {return `Hola ${this.name}!`}
+    else
+   {
+    if(this.language === 'French')
+    {return `Bonjour ${this.name}!`}
+    else
+    {
+      if(this.language === 'Elvish')
+      {return `Suilad ${this.name}!`}
+      else
+      {return `Xzkmnq ${this.name}!`}
+    }
+   }
+  }
+}
+// Suilad
+const dan = new Humanoid({
+  name: 'Dan',
+  language: 'French',
+  dimensions: {length: 1,width:2,height:3},
+  team: 'Red',
+  healthPoints: 999,
+  createdAt: Date.now()
+})
+
+const jose = new Humanoid({
+  name: 'Jose',
+  language: 'Spanish',
+  dimensions: {length: 4,width:5,height:6},
+  team: 'Green',
+  createdAt: Date.now()
+})
+const hero = new Humanoid({
+  name: 'GoodGuy',
+  language: 'Spanish',
+  dimensions: {length: 4,width:5,height:6},
+  team: 'Green',
+  createdAt: Date.now()
+})
+const villain = new Humanoid({
+  name: 'Badman',
+  language: 'Spanish',
+  dimensions: {length: 4,width:5,height:6},
+  team: 'Green',
+  createdAt: Date.now(),
+})
+villain.weaken =  function(victim) {
+  let dummy;
+  let health = 0;
+  health = victim.healthPoints
+  if (victim.healthPoints === dummy)
+    { health = 0}
+    victim.healthPoints = health - 10;
+  let message = (`${victim.name}'s Health was ${health} is now ${victim.healthPoints}.` );
+  return message;  
+}
+
+hero.strengthen =  function(receiver) {
+  let dummy;
+  let health = 0;
+  health = receiver.healthPoints
+  if (receiver.healthPoints === dummy)
+    { health = 0}
+    receiver.healthPoints = health + 10;
+  let message = (`${receiver.name}'s Health was ${health} is now ${receiver.healthPoints}.` );
+  return message;  
+}
+
+console.log(villain.weaken(dan));
+console.log(villain.weaken(jose));
+console.log(hero.strengthen(jose));
+console.log(hero.strengthen(hero));
+
+console.log(jose)
+console.log(dan)
+console.log(hero)
+console.log(villain)
+console.log(dan.greet())
+console.log(jose.greet())
+console.log(jose.destroy())
+console.log(dan.takeDamage())
+console.log(jose.dimensions)
+
  
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
@@ -41,7 +164,7 @@
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -102,7 +225,7 @@
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
